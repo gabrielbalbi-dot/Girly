@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluquería Girly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ff6b9d, #c44dd6, #8b5fbf);
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44dd6 50%, #8b5fbf 100%);
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="20" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="50" r="10" fill="rgba(255,255,255,0.15)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            100% { transform: rotate(360deg) translate(20px, 20px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #2c2c2c;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .girly-text {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b9d, #ffeaa7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .subtitle {
+            background: rgba(255, 182, 193, 0.9);
+            color: #2c2c2c;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffeaa7;
+            font-size: 1.5rem;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .info-section {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .polaroid {
+            position: relative;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .info-text h2 {
+            font-size: 3rem;
+            color: #2c2c2c;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .info-text p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: #ff6b9d;
+            font-weight: bold;
+        }
+
+        .services-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44dd6 100%);
+            position: relative;
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .services-subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 4rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .service-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-title {
+            font-weight: bold;
+            color: #2c2c2c;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #ff6b9d;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b9d, #c44dd6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .emoji-animated {
+            display: inline-block;
+            font-size: 3rem;
+            animation: floatEmoji 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .emoji-animated:hover {
+            animation: bounceEmoji 0.6s ease-in-out;
+            transform: scale(1.3) rotate(10deg);
+            filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.6));
+        }
+
+        @keyframes floatEmoji {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            25% { 
+                transform: translateY(-5px) rotate(2deg); 
+            }
+            50% { 
+                transform: translateY(-10px) rotate(0deg); 
+            }
+            75% { 
+                transform: translateY(-5px) rotate(-2deg); 
+            }
+        }
+
+        @keyframes bounceEmoji {
+            0% { 
+                transform: scale(1) rotate(0deg); 
+            }
+            25% { 
+                transform: scale(1.1) rotate(5deg); 
+            }
+            50% { 
+                transform: scale(1.3) rotate(10deg); 
+            }
+            75% { 
+                transform: scale(1.2) rotate(8deg); 
+            }
+            100% { 
+                transform: scale(1.3) rotate(10deg); 
+            }
+        }
+
+        @keyframes spin360 {
+            0% { 
+                transform: scale(1.3) rotate(10deg); 
+            }
+            50% { 
+                transform: scale(1.5) rotate(180deg); 
+            }
+            100% { 
+                transform: scale(1.3) rotate(370deg); 
+            }
+        }
+
+        .emoji-animated.spinning {
+            animation: spin360 0.8s ease-in-out;
+        }
+
+        .contact-section {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            color: #2c2c2c;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b9d, #c44dd6);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .girly-text {
+                font-size: 2rem;
+            }
+            
+            .info-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: floatAnimation 6s ease-in-out infinite;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="floating-elements">
+            <div class="floating-circle" style="width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+            <div class="floating-circle" style="width: 80px; height: 80px; top: 60%; right: 15%; animation-delay: 2s;"></div>
+            <div class="floating-circle" style="width: 40px; height: 40px; top: 80%; left: 70%; animation-delay: 4s;"></div>
+        </div>
+        
+        <div class="sparkles">
+            <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0.5s;">✨</div>
+            <div class="sparkle" style="top: 25%; right: 25%; animation-delay: 1.5s;">⭐</div>
+            <div class="sparkle" style="top: 70%; left: 15%; animation-delay: 2.5s;">✨</div>
+            <div class="sparkle" style="top: 60%; right: 20%; animation-delay: 3s;">⭐</div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="logo">Peluquería</h1>
+            <h2 class="girly-text">Girly</h2>
+            <div class="subtitle">Pili, Nicki, Emi, G y Luli</div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <div class="info-content">
+                <div class="polaroid">
+                    <div style="width: 100%; height: 300px; background: linear-gradient(45deg, #ff6b9d, #ffeaa7); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <div style="font-size: 4rem;">🌸</div>
+                    </div>
+                </div>
+                <div class="info-text">
+                    <h2>Información</h2>
+                    <p>¡Hola! Bienvenidos a <span class="highlight">"girly"</span>. Somos una empresa de peinados con trenzas etc. Nos encanta peinar y peinarte nos encantaría!</p>
+                    <p>También si quieres mejorar tu peinado puedes agregarle cosas extra: como <span class="highlight">glitter, perfume de coco con brillos, e villas</span> lo que quieras!</p>
+                    <p>¡No te olvides! Estamos en el matemarkret. <span class="highlight">¡Nos vemos ahí! 💖</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <h2 class="services-title">Catálogo</h2>
+            <p class="services-subtitle">Nuestros peinados</p>
+            <div class="gallery">
+                <div class="gallery-item" onclick="openModal('modal1')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(45deg, #8B4513, #DEB887); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">Trenzas Bohemias</div>
+                    <div class="service-info">
+                        <div class="service-title">Trenzas Bohemias</div>
+                        <div class="service-description">Peinado relajado con trenzas sueltas y ondas naturales</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('modal2')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(45deg, #FFD700, #FFF8DC); display: flex; align-items: center; justify-content: center; color: #8B4513; font-size: 1.2rem;">Peinado Natural</div>
+                    <div class="service-info">
+                        <div class="service-title">Peinado Natural</div>
+                        <div class="service-description">Cabello suelto con ondas suaves y look natural</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('modal3')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(45deg, #FF69B4, #FFB6C1); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">Coletas Glamour</div>
+                    <div class="service-info">
+                        <div class="service-title">Coletas Glamour</div>
+                        <div class="service-description">Coletas elegantes con texturas y volumen perfecto</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('modal4')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(45deg, #DDA0DD, #E6E6FA); display: flex; align-items: center; justify-content: center; color: #4B0082; font-size: 1.2rem;">Trenzas Laterales</div>
+                    <div class="service-info">
+                        <div class="service-title">Trenzas Laterales</div>
+                        <div class="service-description">Trenzas delicadas hacia un lado con acabado romántico</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('modal5')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(45deg, #000080, #4169E1); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">Trenzas con Cintas</div>
+                    <div class="service-info">
+                        <div class="service-title">Trenzas con Cintas</div>
+                        <div class="service-description">Trenzas decoradas con cintas coloridas y accesorios</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('modal6')">
+                    <div style="width: 100%; height: 250px; background: linear-gradient(45deg, #2F4F4F, #708090); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">Trenzas Modernas</div>
+                    <div class="service-info">
+                        <div class="service-title">Trenzas Modernas</div>
+                        <div class="service-description">Estilos contemporáneos con trenzas asimétricas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modales para cada peinado -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <div class="modal-image" style="background: linear-gradient(45deg, #8B4513, #DEB887); display: flex; align-items: center; justify-content: center; color: white;">
+                <span class="emoji-animated" onclick="spinEmoji(this)">🌾</span>
+            </div>
+            <h3 class="modal-title">Trenzas Bohemias</h3>
+            <p class="modal-description">Un estilo relajado y natural perfecto para el día a día. Las trenzas bohemias combinan ondas sueltas con trenzas delicadas que enmarcan el rostro de manera romántica. Ideal para quienes buscan un look casual pero elegante con un toque artístico y libre.</p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <div class="modal-image" style="background: linear-gradient(45deg, #FFD700, #FFF8DC); display: flex; align-items: center; justify-content: center; color: #8B4513;">
+                <span class="emoji-animated" onclick="spinEmoji(this)">✨</span>
+            </div>
+            <h3 class="modal-title">Peinado Natural</h3>
+            <p class="modal-description">Cabello suelto con ondas suaves que resaltan la belleza natural. Este peinado enfatiza la textura natural del cabello con ondas ligeras y movimiento fluido. Perfecto para ocasiones casuales donde quieres verte fresca y radiante sin complicaciones.</p>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <div class="modal-image" style="background: linear-gradient(45deg, #FF69B4, #FFB6C1); display: flex; align-items: center; justify-content: center; color: white;">
+                <span class="emoji-animated" onclick="spinEmoji(this)">💄</span>
+            </div>
+            <h3 class="modal-title">Coletas Glamour</h3>
+            <p class="modal-description">Coletas sofisticadas con volumen y textura perfecta. Este estilo combina la practicidad de una coleta con toques glamorosos através de ondas y volumen estratégicamente colocado. Ideal para eventos especiales o cuando quieres un look pulido y elegante.</p>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <div class="modal-image" style="background: linear-gradient(45deg, #DDA0DD, #E6E6FA); display: flex; align-items: center; justify-content: center; color: #4B0082;">
+                <span class="emoji-animated" onclick="spinEmoji(this)">🌸</span>
+            </div>
+            <h3 class="modal-title">Trenzas Laterales</h3>
+            <p class="modal-description">Trenzas delicadas que caen suavemente hacia un lado creando un look romántico y femenino. Este peinado es perfecto para ocasiones especiales donde quieres lucir dulce y elegante. Las trenzas laterales enmarcan el rostro de manera favorecedora.</p>
+        </div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <div class="modal-image" style="background: linear-gradient(45deg, #000080, #4169E1); display: flex; align-items: center; justify-content: center; color: white;">
+                <span class="emoji-animated" onclick="spinEmoji(this)">🎀</span>
+            </div>
+            <h3 class="modal-title">Trenzas con Cintas</h3>
+            <p class="modal-description">Trenzas decoradas con cintas coloridas y accesorios que añaden un toque juguetón y divertido. Perfecto para ocasiones especiales o cuando quieres expresar tu personalidad creativa. Las cintas pueden ser de diferentes colores según tu preferencia.</p>
+        </div>
+    </div>
+
+    <div id="modal6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal6')">&times;</span>
+            <div class="modal-image" style="background: linear-gradient(45deg, #2F4F4F, #708090); display: flex; align-items: center; justify-content: center; color: white;">
+                <span class="emoji-animated" onclick="spinEmoji(this)">⚡</span>
+            </div>
+            <h3 class="modal-title">Trenzas Modernas</h3>
+            <p class="modal-description">Estilos contemporáneos con trenzas asimétricas y formas geométricas. Este peinado combina técnicas tradicionales con un enfoque moderno y vanguardista. Ideal para quienes buscan destacar con un look único y actual.</p>
+        </div>
+    </div>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="contact-title">¡Visítanos!</h2>
+            <p class="contact-info">
+                Estamos ubicadas en el <strong>Matemarkret</strong><br>
+                Te esperamos para crear el peinado perfecto para ti ✨
+            </p>
+
+        </div>
+    </section>
+
+    <script>
+        // Función para hacer girar los emojis 360°
+        function spinEmoji(emoji) {
+            emoji.classList.add('spinning');
+            setTimeout(() => {
+                emoji.classList.remove('spinning');
+            }, 800);
+        }
+
+        // Funciones para los modales
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Animación adicional para los elementos flotantes
+        document.addEventListener('DOMContentLoaded', function() {
+            const sparkles = document.querySelectorAll('.sparkle');
+            
+            setInterval(() => {
+                sparkles.forEach(sparkle => {
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                });
+            }, 3000);
+        });
+
+        // Efecto de parallax suave
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-section::before');
+            const speed = scrolled * 0.5;
+        });
+    </script>
+</body>
+</html>
